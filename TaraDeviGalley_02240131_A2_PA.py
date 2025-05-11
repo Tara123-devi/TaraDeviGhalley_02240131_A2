@@ -1,8 +1,9 @@
 import random
+from TaraDeviGhalley_02240131_A2_PB import PokemonCardBinder  
 
 class GuessNumberGame:
     def __init__(self):
-        self.lower_bound = 1
+        self.lower_bounD = 1
         self.upper_bound = 100
         self.secret_number = random.randint(self.lower_bound, self.upper_bound)
         self.max_attempts = 10
@@ -69,10 +70,8 @@ class RockPaperScissorsGame:
         else:
             print("It's a tie game!")
         return self.user_wins
-
-
 class TriviaPursuitGame:
-    def __init__(self):
+     def __init__(self):
         self.categories = {
             "Science": [
                 {"question": "What is the chemical symbol for water?", "options": ["CO2", "H2O", "Au", "NaCl"], "answer": "H2O"},
@@ -92,7 +91,7 @@ class TriviaPursuitGame:
         }
         self.score = 0
 
-    def play(self):
+     def play(self):
         print("Welcome to Trivia Pursuit Quiz Game!")
         for category, questions in self.categories.items():
             print(f"\nCategory: {category}")
@@ -120,9 +119,40 @@ class TriviaPursuitGame:
 
 
 class PokemonCardBinderManager:
+    def __init__(self):
+        self.binder = PokemonCardBinder()
+
     def play(self):
         print("Welcome to Pokemon Card Binder Manager!")
-        print("This functionality will be implemented in Part B.")
+        while True:
+            print("\nMain Menu:")
+            print("1. Add Pokemon card")
+            print("2. Reset binder")
+            print("3. View current placements")
+            print("4. Exit to Game Center")
+            try:
+                option = int(input("Select option: "))
+            except ValueError:
+                print("Invalid input. Enter a number between 1 and 4.")
+                continue
+
+            if option == 1:
+                try:
+                    number = int(input("Enter Pokedex number: "))
+                    self.binder.add_card(number)
+                except ValueError:
+                    print("Invalid number. Please enter a valid integer.")
+            elif option == 2:
+                print("WARNING: This will delete ALL Pokemon cards from the binder.\nThis action cannot be undone.")
+                user_input = input("Type 'CONFIRM' to reset or anything else to cancel: ")
+                self.binder.reset_binder(user_input)
+            elif option == 3:
+                self.binder.view_binder()
+            elif option == 4:
+                print("Returning to Game Center...")
+                break
+            else:
+                print("Invalid option. Choose between 1 and 4.")
         return 0
 
 
